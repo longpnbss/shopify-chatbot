@@ -1,14 +1,14 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "d7e9f529f0b86c514fa8e5464458ab92"
-application_url = "https://canada-compound-sailing-gibraltar.trycloudflare.com"
+application_url = "https://designer-stocks-trap-sized.trycloudflare.com"
 embedded = true
-name = "base-app"
+name = "app-chatbot"
 handle = "base-app-43"
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
+include_config_on_deploy = true
 
 [webhooks]
 api_version = "2025-01"
@@ -19,9 +19,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://canada-compound-sailing-gibraltar.trycloudflare.com/auth/callback",
-  "https://canada-compound-sailing-gibraltar.trycloudflare.com/auth/shopify/callback",
-  "https://canada-compound-sailing-gibraltar.trycloudflare.com/api/auth/callback"
+  "https://designer-stocks-trap-sized.trycloudflare.com/auth/callback",
+  "https://designer-stocks-trap-sized.trycloudflare.com/auth/shopify/callback",
+  "https://designer-stocks-trap-sized.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

@@ -57,7 +57,7 @@ export function PolarisProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     <AppProvider i18n={translations} linkComponent={AppBridgeLink}>
-      {children}
+      <>{children}</>
     </AppProvider>
   )
 }

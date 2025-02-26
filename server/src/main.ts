@@ -60,7 +60,10 @@ async function main() {
 
   nestApp.use(
     '/api/*',
-    unless('/api/webhooks', shopify.validateAuthenticatedSession()),
+    unless(
+      ['/api/webhooks', '/api/sso/*'],
+      shopify.validateAuthenticatedSession(),
+    ),
   )
 
   nestApp
