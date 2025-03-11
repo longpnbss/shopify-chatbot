@@ -1,3 +1,5 @@
+const APP_PROXY = "/apps/chatbot";
+
 document.addEventListener("DOMContentLoaded", function () {
   const chatBox = document.createElement("div");
   chatBox.id = "chatbot-container";
@@ -34,12 +36,19 @@ document.addEventListener("DOMContentLoaded", function () {
     appendMessage(customerMessage, "customer");
     input.value = "";
 
-    const response = await fetch("/apps/chatbot/reply", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: customerMessage }),
-    }).then((res) => res.json());
+    const response = await fetch(
+      `${APP_PROXY}/api/chatbot/reply?message=${JSON.stringify(customerMessage)}`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      }
+    ).then((res) => res.json());
 
-    appendMessage(response.response || "Sorry, I don't understand.", "bot");
+    if (response.success) {
+      appendMessage(response.message || "Sorry, I don't understand.", "bot");
+    }
   });
 });

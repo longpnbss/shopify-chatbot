@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "d7e9f529f0b86c514fa8e5464458ab92"
-application_url = "https://designer-stocks-trap-sized.trycloudflare.com"
+application_url = "https://answering-treasury-lease-spend.trycloudflare.com"
 embedded = true
 name = "app-chatbot"
 handle = "base-app-43"
@@ -19,10 +19,15 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://designer-stocks-trap-sized.trycloudflare.com/auth/callback",
-  "https://designer-stocks-trap-sized.trycloudflare.com/auth/shopify/callback",
-  "https://designer-stocks-trap-sized.trycloudflare.com/api/auth/callback"
+  "https://answering-treasury-lease-spend.trycloudflare.com/auth/callback",
+  "https://answering-treasury-lease-spend.trycloudflare.com/auth/shopify/callback",
+  "https://answering-treasury-lease-spend.trycloudflare.com/api/auth/callback"
 ]
+
+[app_proxy]
+url = "https://answering-treasury-lease-spend.trycloudflare.com"
+subpath = "chatbot"
+prefix = "apps"
 
 [pos]
 embedded = false

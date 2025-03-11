@@ -36,7 +36,7 @@ export class ChatbotService {
 
     return {
       success: true,
-      data: botResponse,
+      message: botResponse,
     }
   }
 }

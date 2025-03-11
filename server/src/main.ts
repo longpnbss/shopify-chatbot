@@ -30,14 +30,22 @@ const STATIC_PATH = join(
  * @returns
  */
 
-const unless = function (path, middleware) {
-  return function (req, res, next) {
-    if (path === req.originalUrl) {
+const unless = function (paths: string[], middleware: express.RequestHandler) {
+  return function (req: Request, res: Response, next: NextFunction) {
+    if (paths.some((path) => validatePath(path, req.baseUrl))) {
       return next()
     } else {
       return middleware(req, res, next)
     }
   }
+}
+
+const validatePath = function (path: string, baseUrl: string) {
+  const splitPath = path.split('/')
+  const splitBaseUrl = baseUrl.split('/')
+  return splitPath.every(
+    (item, index) => item == '*' || item == splitBaseUrl[index],
+  )
 }
 
 async function main() {
@@ -61,10 +69,23 @@ async function main() {
   nestApp.use(
     '/api/*',
     unless(
-      ['/api/webhooks', '/api/sso/*'],
+      ['/api/webhooks', '/api/chatbot/*'],
       shopify.validateAuthenticatedSession(),
     ),
   )
+
+  // nestApp.use(
+  //   '/api/chatbot/*',
+  //   async (req: Request, res: Response, next: NextFunction) => {
+  //     const token = req.headers['authorization']
+  //     if (!token || token != `Bearer ${process.env.INTEGRATION_TOKEN}`) {
+  //       res.status(403).send({ success: false, message: 'Invalid token' })
+  //       return
+  //     }
+
+  //     return next()
+  //   },
+  // )
 
   nestApp
     .use('/api/webhooks', express.text({ type: '*/*' }))

@@ -1,8 +1,8 @@
-import { Body, Controller, Get } from '@nestjs/common'
+import { Controller, Get, Query } from '@nestjs/common'
 import { ChatbotService } from './chatbot.service'
 
 @Controller('chatbot')
-export class ProductController {
+export class ChatbotController {
   constructor(private readonly ChatbotService: ChatbotService) {}
 
   @Get('/generate')
@@ -11,9 +11,10 @@ export class ProductController {
   }
 
   @Get('/reply')
-  async reply(@Body() body) {
-    const { message } = body
+  async reply(@Query() query) {
+    const { message } = query
+    const messageFormatted = JSON.parse(message || 'null')
 
-    return await this.ChatbotService.reply(message)
+    return await this.ChatbotService.reply(messageFormatted)
   }
 }
