@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "d7e9f529f0b86c514fa8e5464458ab92"
-application_url = "https://answering-treasury-lease-spend.trycloudflare.com"
+application_url = "https://cameroon-destruction-celebrities-anime.trycloudflare.com"
 embedded = true
 name = "app-chatbot"
 handle = "base-app-43"
@@ -19,13 +19,13 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://answering-treasury-lease-spend.trycloudflare.com/auth/callback",
-  "https://answering-treasury-lease-spend.trycloudflare.com/auth/shopify/callback",
-  "https://answering-treasury-lease-spend.trycloudflare.com/api/auth/callback"
+  "https://cameroon-destruction-celebrities-anime.trycloudflare.com/auth/callback",
+  "https://cameroon-destruction-celebrities-anime.trycloudflare.com/auth/shopify/callback",
+  "https://cameroon-destruction-celebrities-anime.trycloudflare.com/api/auth/callback"
 ]
 
 [app_proxy]
-url = "https://answering-treasury-lease-spend.trycloudflare.com"
+url = "https://cameroon-destruction-celebrities-anime.trycloudflare.com"
 subpath = "chatbot"
 prefix = "apps"
 

@@ -1,7 +1,7 @@
 import { ReactNode, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Provider } from '@shopify/app-bridge-react'
-import { Layout, Page } from '@shopify/polaris'
+import { Banner, Layout, Page } from '@shopify/polaris'
 
 /**
  * A component to configure App Bridge.
@@ -73,12 +73,13 @@ export function AppBridgeProvider({ children }: { children: ReactNode }) {
 
     return (
       <Page narrowWidth>
-        <Layout.Section>
-          <div style={{ marginTop: '100px' }}>
-            <div>{bannerProps.title}</div>
-            <div>{bannerProps.children}</div>
-          </div>
-        </Layout.Section>
+        <Layout>
+          <Layout.Section>
+            <div style={{ marginTop: '100px' }}>
+              <Banner {...bannerProps} tone="critical" />
+            </div>
+          </Layout.Section>
+        </Layout>
       </Page>
     )
   }

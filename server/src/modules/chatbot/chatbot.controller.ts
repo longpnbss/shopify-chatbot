@@ -1,13 +1,13 @@
-import { Controller, Get, Query } from '@nestjs/common'
-import { ChatbotService } from './chatbot.service'
+import { Controller, Get, Post, Query } from '@nestjs/common'
+import { ChatbotService } from '@/modules/chatbot/chatbot.service'
 
 @Controller('chatbot')
 export class ChatbotController {
-  constructor(private readonly ChatbotService: ChatbotService) {}
+  constructor(private readonly chatbotService: ChatbotService) {}
 
   @Get('/generate')
   async generate() {
-    return await this.ChatbotService.generate()
+    return await this.chatbotService.generate()
   }
 
   @Get('/reply')
@@ -15,6 +15,14 @@ export class ChatbotController {
     const { message } = query
     const messageFormatted = JSON.parse(message || 'null')
 
-    return await this.ChatbotService.reply(messageFormatted)
+    return await this.chatbotService.reply(messageFormatted)
   }
+
+  // @Post('/create')
+  // async create(@Query() query) {
+  //   const { message } = query
+  //   const messageFormatted = JSON.parse(message || 'null')
+
+  //   return await this.chatbotService.create(messageFormatted)
+  // }
 }

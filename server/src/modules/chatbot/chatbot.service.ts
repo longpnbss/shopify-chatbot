@@ -1,10 +1,20 @@
 import { Injectable } from '@nestjs/common'
 import { ShopifyService } from 'src/shared/services/shopify.service'
 import { getResponse } from './utils/const'
+import { PrismaClient } from '@prisma/client'
 
+type ChatbotType = {
+  question: string
+  answer: string
+  category: string
+}
 @Injectable()
 export class ChatbotService {
-  constructor(private readonly shopify: ShopifyService) {}
+  prisma: PrismaClient
+
+  constructor(private readonly shopify: ShopifyService) {
+    this.prisma = new PrismaClient()
+  }
 
   async generate() {
     const jsChatbot = `
@@ -38,5 +48,17 @@ export class ChatbotService {
       success: true,
       message: botResponse,
     }
+  }
+
+  async create(dataChatbot: ChatbotType) {
+    const { question, answer, category } = dataChatbot
+
+    // return await this.prisma.chatbot.create({
+    //   data: {
+    //     question,
+    //     answer,
+    //     category,
+    //   },
+    // })
   }
 }

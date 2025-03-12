@@ -8,6 +8,8 @@ export class ProductController {
 
   @Get()
   async fetchProducts(@ShopSession() session) {
+    console.log('zzzzzzzzzzzz');
+    
     const products = await this.productService.fetchProducts(session)
     return products?.data || []
   }

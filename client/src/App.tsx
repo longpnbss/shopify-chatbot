@@ -19,17 +19,16 @@ export default function App() {
         <AppBridgeProvider>
           <GraphQLProvider>
             <NavigationMenu
-              navigationLinks={
-                [
-                  {
-                    label: "Pages",
-                    destination: "/page",
-                  },       {
-                    label: "Preference",
-                    destination: "/preference",
-                  },
-                ]
-              }
+              navigationLinks={[
+                {
+                  label: 'Pages',
+                  destination: '/page',
+                },
+                {
+                  label: 'Preference',
+                  destination: '/preference',
+                },
+              ]}
             />
             <Routes pages={pages} />
             <ReactQueryDevtools />

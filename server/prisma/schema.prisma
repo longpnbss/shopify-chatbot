@@ -21,3 +21,11 @@ model AppSession {
   shop    String
   payload Json
 }
+
+model Chatbot {
+  id         String   @id @default(cuid())
+  question   String   @unique
+  answer     String
+  category   String
+  created_at DateTime @default(now())
+}
