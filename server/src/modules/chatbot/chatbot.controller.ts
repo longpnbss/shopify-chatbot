@@ -1,5 +1,5 @@
 import { ChatbotService } from '@/modules/chatbot/chatbot.service'
-import { Controller, Get, Post, Query, Req } from '@nestjs/common'
+import { Controller, Delete, Get, Post, Put, Query, Req } from '@nestjs/common'
 
 @Controller('chatbot')
 export class ChatbotController {
@@ -23,5 +23,19 @@ export class ChatbotController {
     const data = req.body.data
 
     return await this.chatbotService.create(data)
+  }
+
+  @Put('/update')
+  async update(@Req() req) {
+    const data = req.body.data
+
+    return await this.chatbotService.update(data)
+  }
+
+  @Delete('/delete')
+  async delete(@Req() req) {
+    const id = req.body.id
+
+    return await this.chatbotService.delete(id)
   }
 }

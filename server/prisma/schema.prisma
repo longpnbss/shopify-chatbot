@@ -24,8 +24,15 @@ model AppSession {
 
 model Chatbot {
   id         String   @id @default(cuid())
-  question   String   @unique
   answer     String
-  category   String
+  category   CategoryType @default(GENERAL)
   created_at DateTime @default(now())
+}
+
+enum CategoryType {
+  GENERAL
+  RETURN
+  SHIPPING
+  PAYMENT
+  WARRANTY
 }

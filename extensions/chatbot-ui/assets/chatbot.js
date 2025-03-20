@@ -48,7 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ).then((res) => res.json());
 
     if (response.success) {
-      appendMessage(response.message || "Sorry, I don't understand.", "bot");
+      const message = JSON.parse(response.message);
+      appendMessage(message || "Sorry, I don't understand.", "bot");
     }
   });
 });

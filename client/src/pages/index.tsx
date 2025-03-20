@@ -1,87 +1,78 @@
+import ModalCreate from '@/components/pages/list-question/ModalCreate'
+import ModalDelete from '@/components/pages/list-question/ModalDelete'
+import ModalEdit from '@/components/pages/list-question/ModalEdit'
+import useListQuestion from '@/hooks/pages/list-question/useListQuestion'
 import {
+  Button,
   CalloutCard,
   Card,
-  DataTable,
-  FormLayout,
+  IndexTable,
+  InlineGrid,
   Layout,
-  Modal,
   Page,
-  Select,
-  TextField,
   Text,
+  useIndexResourceState,
 } from '@shopify/polaris'
-
-import { useApi } from '@/hooks/useApi'
-import { useCallback, useEffect, useState } from 'react'
+import { DeleteIcon, EditIcon } from '@shopify/polaris-icons'
 
 const optionCategory = [
-  { label: 'General', value: 'general' },
-  { label: 'Shipping', value: 'shipping' },
-  { label: 'Returns', value: 'returns' },
-  { label: 'Payment method', value: 'payment-method' },
+  { label: 'General', value: 'GENERAL' },
+  { label: 'Shipping', value: 'SHIPPING' },
+  { label: 'Returns', value: 'RETURN' },
+  { label: 'Payment method', value: 'PAYMENT' },
+  { label: 'Warranty', value: 'WARRANTY' },
 ]
-type ChatbotType = {
-  question: string
-  answer: string
-  category: string
-}[]
 
 export default function HomePage() {
-  const api = useApi()
+  const {
+    rows,
+    questions,
+    openModalCreate,
+    activeModalCreate,
+    setActiveModalCreate,
+    setQuestions,
+    activeModalEdit,
+    setActiveModalEdit,
+    handleActionEdit,
+    handleActionDelete,
+    idsEdited,
+    activeModalDelete,
+    setActiveModalDelete,
+    idsDeleted,
+  } = useListQuestion({ optionCategory })
 
-  const [questions, setQuestions] = useState<ChatbotType>([])
+  const { selectedResources, allResourcesSelected, handleSelectionChange } =
+    useIndexResourceState(questions)
 
-  const [active, setActive] = useState(false)
-  const [newQuestion, setNewQuestion] = useState('')
-  const [newAnswer, setNewAnswer] = useState('')
-  const [newCategory, setNewCategory] = useState('General')
+  const rowMarkup = questions.map(({ id, answer, category }, index) => (
+    <IndexTable.Row
+      id={id}
+      key={index}
+      selected={selectedResources.includes(id)}
+      position={index}
+    >
+      <IndexTable.Cell>{answer}</IndexTable.Cell>
+      <IndexTable.Cell>{category}</IndexTable.Cell>
+      <IndexTable.Cell>
+        <InlineGrid gap="100" columns={2} alignItems="center">
+          <Button
+            onClick={() => handleActionEdit(id)}
+            size="slim"
+            icon={EditIcon}
+          />
+          <Button
+            onClick={() => handleActionDelete(id)}
+            size="slim"
+            icon={DeleteIcon}
+            tone="critical"
+            variant="primary"
+          />
+        </InlineGrid>
+      </IndexTable.Cell>
+    </IndexTable.Row>
+  ))
 
-  const toggleModal = useCallback(() => setActive(!active), [active])
-
-  const handleSave = async () => {
-    const data = {
-      question: newQuestion,
-      answer: newAnswer,
-      category: newCategory,
-    }
-    const response = await api.post('/chatbot/create', { data })
-    console.log(response)
-
-    setQuestions([...questions, data])
-    toggleModal()
-  }
-
-  useEffect(() => {
-    const getData = async () => {
-      const response = await api.get('/chatbot/get')
-      console.log('Data Fetched', response)
-
-      setQuestions(response.data)
-    }
-
-    getData()
-  }, [])
-
-  const headings = [
-    <Text variant="headingMd" as="h6" key="question">
-      Question
-    </Text>,
-    <Text variant="headingMd" as="h6" key="answer">
-      Answer
-    </Text>,
-    <Text variant="headingMd" as="h6" key="category">
-      Category
-    </Text>,
-  ]
-
-  const categoryGenerated = (category: string) =>
-    optionCategory.find((opt) => opt.value === category)?.label
-
-  const rows = questions.map((q) => [
-    q.question,
-    q.answer,
-    categoryGenerated(q.category) || q.category,
-  ])
+  console.log(questions)
 
   return (
     <Page>
@@ -89,57 +80,62 @@ export default function HomePage() {
         <Layout.Section>
           <CalloutCard
             title={
-              <Text variant="heading3xl" as="h2">
+              <Text variant="heading3xl" as="p">
                 List questions
               </Text>
             }
             illustration="https://cdn.shopify.com/s/assets/admin/checkout/settings-customizecart-705f57c725ac05be5a34ec20c05b94298cb8afd10aac7bd9c7ad02030f48cfa0.svg"
             primaryAction={{
               content: 'Add new question',
-              onAction: toggleModal,
+              onAction: openModalCreate,
             }}
           >
             <Card>
-              <DataTable
-                columnContentTypes={['text', 'text', 'text']}
-                headings={headings}
-                rows={rows}
-              />
+              <IndexTable
+                resourceName={{
+                  singular: 'order',
+                  plural: 'orders',
+                }}
+                itemCount={rows.length}
+                selectedItemsCount={
+                  allResourcesSelected ? 'All' : selectedResources.length
+                }
+                onSelectionChange={handleSelectionChange}
+                headings={[
+                  { title: 'Answer' },
+                  { title: 'Category' },
+                  { title: 'Actions' },
+                ]}
+                selectable={false}
+              >
+                {rowMarkup}
+              </IndexTable>
             </Card>
-            <Modal
-              open={active}
-              onClose={toggleModal}
-              title="Add new question"
-              primaryAction={{ content: 'Lưu', onAction: handleSave }}
-            >
-              <Modal.Section>
-                <FormLayout>
-                  <TextField
-                    label={
-                      <Text variant="heading3xl" as="h4">
-                        Question
-                      </Text>
-                    }
-                    value={newQuestion}
-                    onChange={(val) => setNewQuestion(val)}
-                    autoComplete="off"
-                  />
-                  <TextField
-                    label="Trả lời"
-                    value={newAnswer}
-                    onChange={(val) => setNewAnswer(val)}
-                    autoComplete="off"
-                  />
-                  <Select
-                    label="Danh mục"
-                    options={optionCategory}
-                    value={newCategory}
-                    onChange={(val) => setNewCategory(val)}
-                  />
-                </FormLayout>
-              </Modal.Section>
-            </Modal>
+            <ModalCreate
+              activeModalCreate={activeModalCreate}
+              setActiveModalCreate={setActiveModalCreate}
+              optionCategory={optionCategory}
+              setQuestions={setQuestions}
+            />
+            <ModalEdit
+              activeModalEdit={activeModalEdit}
+              setActiveModalEdit={setActiveModalEdit}
+              optionCategory={optionCategory}
+              setQuestions={setQuestions}
+              questions={questions}
+              idsEdited={idsEdited}
+            />
+            <ModalDelete
+              activeModalDelete={activeModalDelete}
+              setActiveModalDelete={setActiveModalDelete}
+              setQuestions={setQuestions}
+              questions={questions}
+              idsDeleted={idsDeleted}
+            />
           </CalloutCard>
+          {/* <Button onClick={test} size="large">
+            Button test
+          </Button> */}
         </Layout.Section>
       </Layout>
     </Page>
