@@ -80,8 +80,8 @@ export default function HomePage() {
         <Layout.Section>
           <CalloutCard
             title={
-              <Text variant="heading3xl" as="p">
-                List questions
+              <Text variant="heading3xl" alignment="center" as="p">
+                List Questions
               </Text>
             }
             illustration="https://cdn.shopify.com/s/assets/admin/checkout/settings-customizecart-705f57c725ac05be5a34ec20c05b94298cb8afd10aac7bd9c7ad02030f48cfa0.svg"
@@ -107,6 +107,11 @@ export default function HomePage() {
                   { title: 'Actions' },
                 ]}
                 selectable={false}
+                pagination={{
+                  hasNext: true,
+                  hasPrevious: true,
+                  label: 'Pagination',
+                }}
               >
                 {rowMarkup}
               </IndexTable>
