@@ -1,12 +1,17 @@
-
 <div class="chatbot-ui" id="chatbot-ui">
+  {% render 'chatbot' %}
 </div>
+
+<script>
+  const chatbotLogo = "{{ 'chatbot_avatar_30x30.png' | asset_url }}";
+</script>
 <script src="{{ 'chatbot.js' | asset_url }}" defer></script>
 <link type="text/css" href="{{ 'chatbot.css' | asset_url }}" rel="stylesheet">
 
 {% schema %}
 {
   "name": "Chatbot",
-  "target": "section"
+  "target": "section",
+  "settings": []
 }
 {% endschema %}

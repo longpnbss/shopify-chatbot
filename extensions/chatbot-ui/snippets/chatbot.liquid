@@ -1,0 +1,48 @@
+<div id="chatbot-container" class="chatbot-container">
+  <div id="chatbot-header" class="chatbot-header">
+    <div class="chatbot-name">Assistant</div>
+    <div class="chatbot-status">
+      <div class="status-indicator"></div>
+      <span>Online</span>
+    </div>
+  </div>
+  <div id="chatbot-content" class="chatbot-content">
+    <div id="chatbot-conversation" class="chatbot-conversation">
+      <div class="chatbot-message-wrapper bot">
+        <div class="chatbot-avatar">
+          <img class="chatbot-avatar-image" src="{{ 'chatbot_avatar_30x30.png' | asset_url }}" width="30px" height="30px"/>
+        </div>
+        <div class="chatbot-message">Hi! How can I help?</div>
+      </div>
+    </div>
+    <div class="chatbot-suggestion-card">
+      <div class="response-card-option">Information about product returns.</div>
+      <div class="response-card-option">How long is the product warranty?</div>
+      <div class="response-card-option">What is the payment method?</div>
+    </div>
+  </div>
+  <form id="chatbot-input-container" class="chatbot-input-container">
+    <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Send us a message..." />
+    <button id="chatbot-send" class="chatbot-send" type="submit">
+      <div class="chatbot-send-wrapper">
+        <span>Send</span>
+        <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" width="100px" height="100px" fill="#ffffff" stroke="#ffffff">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <style type="text/css">
+              .st0{fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+              .st1{fill:none;stroke:#ffffff;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:10;}
+            </style>
+            <path class="st0" d="M26.4,2.9L3.8,15c-0.7,0.4-0.7,1.5,0.1,1.8l20.8,8.7c0.6,0.3,1.3-0.2,1.4-0.8l1.7-20.8 C27.9,3,27.1,2.5,26.4,2.9z"></path>
+            <path class="st0" d="M26,4L13,20v7.3c0,0.9,1.2,1.4,1.8,0.7L19,23"></path>
+          </g>
+        </svg>
+      </div>
+    </button>
+  </form>
+</div>
+<div class="chatbot-popup-wrapper" id="chatbot-popup-wrapper">
+  <div class="chatbot-popup"></div>
+  {% comment %} <img class="chatbot-popup-open" src="{{ 'chatbot_avatar_50x50.png' | asset_url }}" width="50px" height="50px"/> {% endcomment %}
+</div>

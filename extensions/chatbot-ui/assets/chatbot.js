@@ -1,36 +1,12 @@
 const APP_PROXY = "/apps/chatbot";
 
 document.addEventListener("DOMContentLoaded", function () {
-  const chatBox = document.createElement("div");
-  chatBox.id = "chatbot-container";
-  chatBox.innerHTML = `
-    <div id="chatbot-header" class="chatbot-header">
-      <div class="chatbot-name">Assistant</div>
-      <div class="chatbot-status">
-        <div class="status-indicator"></div>
-        <span>Online</span>
-      </div>
-    </div>
-    <div id="chatbot-content" class="chatbot-content">
-      <div id="chatbot-conversation" class="chatbot-conversation"></div>
-      <div class="chatbot-suggestion-card">
-        <div class="response-card-option">Information about product returns.</div>
-        <div class="response-card-option">How long is the product warranty?</div>
-        <div class="response-card-option">What is the payment method?</div>
-      </div>
-    </div>
-    <form id="chatbot-input-container" class="chatbot-input-container">
-      <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Send us a message..." />
-      <button id="chatbot-send" class="chatbot-send" type="submit">Send</button>
-    </form>
-  `;
-  document.body.appendChild(chatBox);
-
   const input = document.getElementById("chatbot-input");
   const form = document.getElementById("chatbot-input-container");
   const messagesContainer = document.getElementById("chatbot-conversation");
   const chatbotContent = document.getElementById("chatbot-content");
   const suggestions = document.querySelectorAll(".response-card-option");
+  const buttonPopup = document.getElementById("chatbot-popup-wrapper");
 
   const appendMessage = (text, sender) => {
     const messageWrapper = document.createElement("div");
@@ -44,9 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const showLoadingMessage = () => {
+    const container = document.getElementById("chatbot-content");
     const messageLoading = document.createElement("div");
     messageLoading.className = "chatbot-message-wrapper bot";
     messageLoading.innerHTML = `
+      <div class"chatbot-avatar">
+        <img class="chatbot-avatar-image" src="${chatbotLogo}">
+      </div>
       <div class="chatbot-message">
         <div class="chatbot-loader">
           <span></span>
@@ -55,8 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
     `;
+
     messagesContainer.appendChild(messageLoading);
+    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+
     return messageLoading;
+  };
+
+  const scrollToBottom = () => {
+    const container = document.getElementById("chatbot-content");
+    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
   };
 
   const fetchChatbotReply = async (customerMessage) => {
@@ -70,6 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
           method: "GET",
         }
       ).then((res) => res.json());
+
+      console.log(response.message, typeof response.message);
+      
 
       return response.success
         ? JSON.parse(response.message)
@@ -97,7 +88,11 @@ document.addEventListener("DOMContentLoaded", function () {
     messageLoading.replaceWith(
       Object.assign(document.createElement("div"), {
         className: "chatbot-message-wrapper bot",
-        innerHTML: `<div class="chatbot-message">${botReply}</div>`,
+        innerHTML: `
+          <div class"chatbot-avatar">
+            <img class="chatbot-avatar-image" src="${chatbotLogo}">
+          </div>
+          <div class="chatbot-message">${botReply}</div>`,
       })
     );
 
@@ -105,6 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (chatbotContent.classList.contains("on-chat")) {
         chatbotContent.classList.remove("on-chat");
       }
+
+      scrollToBottom();
     }, 5000);
   };
 
@@ -117,5 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
     option.addEventListener("click", () => {
       sendMessage(option.textContent);
     });
+  });
+
+  buttonPopup.addEventListener("click", function () {
+    this.classList.toggle("active");
+    const chatbotContainer = document.getElementById("chatbot-container");
+    chatbotContainer.classList.toggle("active");
   });
 });
