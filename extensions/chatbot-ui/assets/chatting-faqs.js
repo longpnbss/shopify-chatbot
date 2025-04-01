@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const messagesContainer = document.getElementById("chatbot-conversation");
   const chatbotContent = document.getElementById("chatbot-content");
   const suggestions = document.querySelectorAll(".response-card-option");
-  const buttonPopup = document.getElementById("chatbot-popup-wrapper");
 
   const appendMessage = (text, sender) => {
     const messageWrapper = document.createElement("div");
@@ -58,9 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
           method: "GET",
         }
       ).then((res) => res.json());
-
-      console.log(response.message, typeof response.message);
-      
 
       return response.success
         ? JSON.parse(response.message)
@@ -114,11 +110,5 @@ document.addEventListener("DOMContentLoaded", function () {
     option.addEventListener("click", () => {
       sendMessage(option.textContent);
     });
-  });
-
-  buttonPopup.addEventListener("click", function () {
-    this.classList.toggle("active");
-    const chatbotContainer = document.getElementById("chatbot-container");
-    chatbotContainer.classList.toggle("active");
   });
 });

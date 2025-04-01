@@ -1,17 +1,3 @@
-#chatbot-ui {
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-}
-
-.shopify-section.section > .scroll-trigger.animate--slide-in {
-  opacity: 1;
-  transform: none;
-  animation: none;
-}
-
 .chatbot-container {
   opacity: 0;
   width: 400px;
@@ -25,9 +11,9 @@
   pointer-events: none;
 }
 
-.chatbot-container.active {
+.chatbot-ui.active .chatbot-container {
   position: fixed;
-  bottom: 100px;
+  bottom: 90px;
   right: 20px;
   opacity: 1;
   z-index: 1000;
@@ -231,39 +217,6 @@
   gap: 5px;
 }
 
-.chatbot-popup-wrapper {
-  box-shadow:
-    4px 4px 8px 0 rgb(0 0 0 / 20%),
-    4px 6px 20px 0 rgb(0 0 0 / 19%);
-  height: 50px;
-  width: 50px;
-  bottom: 20px;
-  right: 20px;
-  position: fixed;
-  border-radius: 50%;
-  cursor: pointer;
-  overflow: hidden;
-  background-color: #fff;
-  z-index: 1000;
-}
-
-.chatbot-popup-wrapper .chatbot-popup {
-  height: 50px;
-  width: 50px;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-image: url(./chatbot_avatar_50x50.png);
-  background-size: cover;
-  animation: rotateLeft 0.5s linear;
-}
-
-.chatbot-popup-wrapper.active .chatbot-popup {
-  background-image: url(./close_icon_50x50.png);
-  background-size: 50%;
-  animation: rotateRight 0.5s linear;
-}
-
 @keyframes loader {
   0% {
     height: 6px;
@@ -273,23 +226,5 @@
   100% {
     opacity: 0.3;
     -webkit-transform: translateY(-6px);
-  }
-}
-
-@keyframes rotateLeft {
-  from {
-    transform: rotate(180deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes rotateRight {
-  from {
-    transform: rotate(180deg);
-  }
-  to {
-    transform: rotate(0deg);
   }
 }

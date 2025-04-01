@@ -1,0 +1,32 @@
+.chatbot-help-center {
+  opacity: 0;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-top: 1px solid #2862ff;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.chatbot-ui.active .chatbot-help-center {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  opacity: 1;
+  z-index: 1100;
+  transition: opacity 0.5s ease;
+  pointer-events: all;
+}
+
+.chatbot-help-center-title {
+  font-size: 24px;
+  padding: 20px;
+  border-top: 5px solid #2862ff;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 700;
+  color: #2862ff;
+}

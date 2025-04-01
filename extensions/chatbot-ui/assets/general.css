@@ -1,0 +1,19 @@
+.chatbot-ui {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  height: 0;
+}
+
+.chatbot-ui.active {
+  height: auto;
+  transition: height 0.5s ease;
+}
+
+.shopify-section.section > .scroll-trigger.animate--slide-in {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}

@@ -42,7 +42,9 @@
     </button>
   </form>
 </div>
-<div class="chatbot-popup-wrapper" id="chatbot-popup-wrapper">
-  <div class="chatbot-popup"></div>
-  {% comment %} <img class="chatbot-popup-open" src="{{ 'chatbot_avatar_50x50.png' | asset_url }}" width="50px" height="50px"/> {% endcomment %}
-</div>
+
+<script>
+  const chatbotLogo = "{{ 'chatbot_avatar_30x30.png' | asset_url }}";
+</script>
+<script src="{{ 'chatting-faqs.js' | asset_url }}" defer></script>
+<link type="text/css" href="{{ 'chatting-faqs.css' | asset_url }}" rel="stylesheet">
