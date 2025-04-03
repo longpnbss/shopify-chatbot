@@ -1,8 +1,6 @@
 .chatbot-help-center {
   opacity: 0;
   width: 400px;
-  border: 1px solid #ccc;
-  border-top: 1px solid #2862ff;
   background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -25,8 +23,39 @@
 .chatbot-help-center-title {
   font-size: 24px;
   padding: 20px;
-  border-top: 5px solid #2862ff;
+  border-top: 8px solid #2862ff;
   border-bottom: 1px solid #e2e8f0;
   font-weight: 700;
   color: #2862ff;
+}
+
+.chatbot-help-center-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.chatbot-help-center-option {
+  display: flex;
+  overflow: hidden;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: rgba(20, 20, 20, 0.1) 0px 4px 8px 0px;
+  border: 1px solid rgba(226, 227, 222, 0.9);
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.chatbot-help-center-option .text {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chatbot-help-center-option .icon,
+.chatbot-help-center-option .icon svg {
+  height: 30px;
+  width: 30px;
 }

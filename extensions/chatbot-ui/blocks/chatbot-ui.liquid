@@ -1,10 +1,16 @@
 <div id="chatbot-ui" class="chatbot-ui">
-  {% render 'help-center' %}
-  {% comment %} {% render 'chatting-faqs' %} {% endcomment %}
+  <div id="chatbot-step-help-center" class="chatbot-step active">
+    {% render 'help-center' %}
+  </div>
+
+  <div id="chatbot-step-faqs" class="chatbot-step">
+    {% render 'chatting-faqs' %}
+  </div>
   {% render 'button-popup' %}
 </div>
 
 <link type="text/css" href="{{ 'general.css' | asset_url }}" rel="stylesheet">
+<script src="{{ 'general.js' | asset_url }}" defer></script>
 
 {% schema %}
 {

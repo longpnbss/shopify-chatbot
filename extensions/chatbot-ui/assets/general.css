@@ -17,3 +17,11 @@
   transform: none;
   animation: none;
 }
+
+.chatbot-step {
+  display: none;
+}
+
+.chatbot-step.active {
+  display: block;
+}
